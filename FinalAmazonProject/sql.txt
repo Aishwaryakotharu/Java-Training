@@ -1,1 +1,78 @@
+SHOPS: 
+ 
+CREATE TABLE `shops` ( 
+`id` int unsigned NOT NULL AUTO_INCREMENT, 
+`name` varchar(50) DEFAULT NULL, 
+ PRIMARY KEY (`id`)) ; 
+insert into shops values(501,'gold'); 
+insert into shops values(502,'veg'); 
+insert into shops values(503,'grocery'); 
+================================================================================================= 
+ITEMS: 
+ 
+CREATE TABLE `items` ( 
+`id` int unsigned NOT NULL AUTO_INCREMENT, 
+`item_description` varchar(50) DEFAULT NULL, 
+`unit` varchar(10) DEFAULT NULL, 
+`price` int unsigned DEFAULT NULL, 
+`imageurl` varchar(255) DEFAULT NULL, 
+`shopid` int unsigned DEFAULT NULL, 
+PRIMARY KEY (`id`), 
+ KEY `shopid` (`shopid`), 
+CONSTRAINT `items_ibfk_1` FOREIGN KEY (`shopid`) REFERENCES `shops` (`id`) ) ; 
+
+insert into items values(201,'gold','kg',23432,'',501);
+insert into items values(202,'diamond','pcs',432432,'',501);
+insert into items values(203,'silver','kg',4324,'',501);
+ 
+================================================================================================= 
+INVOICE_MASTER: /bill
+ 
+Create table ‘invoice_master’ (‘id’  unsigned NOT NULL AUTO_INCREMENT, ‘bill_date’ date DEFAULT NULL, 
+ `customer_id` int unsigned DEFAULT NULL, 
+`discount` int DEFAULT NULL, ‘get’ int DEFAULT NULL, 
+PRIMARY KEY(`id`),KEY ‘customer_id’(‘customer_id’),CONSTRAINT ‘invoice_master_ibfk_1’ 
+FOREIGN_KEY (‘customer_id’) REFERENCES ‘users(‘id’)); 
+   
+insert into invoice_master values(101,'2021-02-02',1,100,0); 
+insert into invoice_master values(102,'2021-03-03',2,100,0); 
+insert into invoice_master values(103,'2021-04-04',3,100,0); 
+================================================================================================= 
+USERS: 
+ 
+CREATE TABLE `users` ( 
+`id` int unsigned NOT NULL AUTO_INCREMENT, 
+`name` varchar(50) DEFAULT NULL, 
+password` varchar(50) DEFAULT NULL, 
+`address` varchar(255) DEFAULT 'not mentioned', 
+`role` varchar(10) DEFAULT 'customer', 
+`loginstatus` tinyint(1) NOT NULL DEFAULT '0', 
+PRIMARY KEY (`id`)); 
+ 
+INSERT INTO users (id,name,password,address,role,loginstatus) VALUES(1,'aishu','aishu','chennai','user',0); 
+INSERT INTO users (id,name,password,address,role,loginstatus) VALUES(2,’admin’,’admin’,’hyd’,’user’,0); 
+INSERT INTO users (id,name,password,address,role,loginstatus) VALUES(3,'root','root','delhi','user',0; 
+================================================================================================= 
+
+
+INVOICES: 
+ 
+CREATE TABLE `invoices` ( 
+id` int unsigned NOT NULL AUTO_INCREMENT, 
+`billid` int unsigned DEFAULT NULL, 
+`itemid` int unsigned DEFAULT NULL, 
+`quantity` int DEFAULT NULL, 
+PRIMARY KEY (`id`), 
+KEY `billid` (`billid`), 
+KEY `itemid` (`itemid`), 
+CONSTRAINT `invoices_ibfk_1` FOREIGN KEY (`billid`) REFERENCES `bills` (`id`), 
+CONSTRAINT `invoices_ibfk_2` FOREIGN KEY (`itemid`) REFERENCES `items` (`id`)); 
+insert into invoices values(101,101,201,100);
+insert into invoices values(102,102,202,500);
+insert into invoices values(103,103,203,500);
+
+git commit -a -m "commit "
+git config --global user.email “aishwaryakotharu23@gmail.com”
+git config --global user.name “aishwarya”
+git remote add origin https://github.com/Aishwaryakotharu/Java.FinalWebAmazon.git
 
